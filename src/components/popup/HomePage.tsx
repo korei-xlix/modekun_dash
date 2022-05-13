@@ -51,7 +51,7 @@ export const HomePage = (props: HomePageProps) => {
       <RangeSlider
         label={chrome.i18n.getMessage("repeatWordsThreshold")}
         unitLabel={chrome.i18n.getMessage("times")}
-        min={1}
+        min={0}
         max={20}
         step={1}
         defaultValue={param.repeatWordThreshold}
@@ -82,7 +82,7 @@ export const HomePage = (props: HomePageProps) => {
         label={chrome.i18n.getMessage("maxNumOfCharacters")}
         unitLabel={""}
         min={1}
-        max={200}
+        max={1024}
         step={1}
         defaultValue={param.lengthThreshold}
         updateParam={(value: number) => {

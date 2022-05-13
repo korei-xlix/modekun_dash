@@ -61,8 +61,10 @@ export const hideRepeatWords = async (
 ) => {
   const counts = await api.getMaxRepeatWordCounts(chats.map((c) => c.message));
   chats.forEach((chat, i) => {
-    if (counts[i] >= param.repeatWordThreshold) {
-      hide(param, chrome.i18n.getMessage("repeatWords"), chat);
+    if (param.repeatWordThreshold>0) {
+      if (counts[i] >= param.repeatWordThreshold) {
+        hide(param, chrome.i18n.getMessage("repeatWords"), chat);
+      }
     }
   });
 };
