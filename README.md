@@ -4,6 +4,9 @@
 
 # システム概要 <a name="aSystemSummary"></a>
 Youtube Liveチャットのフィルターをおこなうブラウザ拡張modです。  
+modekun dashの画面で設定した閾値を超えたコメントが表示除外処理されます。  
+* コメントが削除されるわけではありません。  
+* 除外処理は時間がかかることがあり、全てのコメントが瞬時に除外されるわけではありません。  
   
 なお本ソースはオリジナルの「modekun」を少し機能変更してます。  
 オリジナルの詳細は、オリジナルのリポジトリを参照ください。（以下謝辞に掲載）  
@@ -18,7 +21,6 @@ Youtube Liveチャットのフィルターをおこなうブラウザ拡張mod�
 * [起動方法](#aStart)
 * [アップデート手順](#aUpdate)
 * [運用方法](#aHowtoUnyou)
-* [機能説明](#aFunction)
 * [本リポジトリの規約](#aRules)
 * [参考記事](#aReference)
 * [謝辞](#aAcknowledgments)
@@ -69,148 +71,135 @@ npm --version
   * 3.環境変数画面で、下段の「PATHEXT」の編集で末尾に ;.cmd を追記  
   * 4.OKを押して、開いた全てのウィンドウを閉じる  
 
+* 5.本家（うち）のリポジトリを、自分のgithubアカウントにcloneします  
+  
+  [botリポジトリ](https://github.com/korei-xlix/modekun_dash)  
+  の右上あたりの[Fork]ボタンを押してください。  
+  すると、自分のアカウントに[自垢名 / koreibot_win]というリポジトリができます。  
 
+* 6.githubデスクトップで1項でForkしたリポジトリから自PCにクローンをダウンロードします。  
+  githubデスクトップのCurrent repository→Add→Cloneを選択します。  
+  任意のフォルダを選択してCloneを押してください。  
 
+* 7.自分のブランチを作ります（任意）  
+  githubデスクトップのCurrent branch→New branchで任意の名前を入力します。  
+  バックアップ用の作業となります。  
 
-
-
-
-
+8.プロンプトを起動して、6でコピーしたフォルダにチェンジ移動し、以下のコマンドを入力します  
+```
+このコマンドは初回だけでOKです
 npm install
 
+これはビルドコマンドです
 npm run build
 
-npm run watch
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Usage
-Now, modekun can be used only in Youtube and Mildom, and only Japanese.
-
-- moderate
-  - repeat post 
-  - repeat word in a chat
-  - NG word
-  - post frequency
-  - limit length
-  
-popup looks like this
-
-![popup-home](docs/popup-home.png)
-![popup-ng](docs/popup-ng.png)
-
-
-chats are hidden automatically
-
-![chats](docs/chats.png)
-
-### repeat post 
-repeat post threshold (連投閾値) can control how many chats posted by the same user should not be hidden.
-  
-#### example
 ```
-user A: こんにちは
-user A: こんにちは
-user A: こんにちは
-user B: こんにちは
-user B: こんにちは
-```
-If `repeat post threshold = 3`, chats posted by user A will be hidden. 
+ビルドすると、distフォルダに成果物ができあがります。  
+成果物のインストールはアップデート手順を参照ください。  
 
-### repeat word in a chat
-repeat word in a chat (単語繰り返し閾値) can control how many words shown in a chat should not be hidden.
 
-#### example
-```
-user A: 最強最強最強
-user B: こんにちは
-```
-If `repeat word in a chat = 2`, chats posted by user A will be hidden.
 
-### NG word
-```
-user A: こんにちは
-user A: こん
-user B: ハロー
-```
-If `NG word = こん`, chats posted by user A will be hidden.
 
-### post frequency
-post frequency(投稿頻度) can control how many posts by the same user in obtained chats.
-```
-user A: abc
-user A: def
-user B: こんにちは
-```
-If `post frequency threshold = 2`, chats posted by user A will be hidden.
+# アップデート手順 <a name="aUpdate"></a>
+リポジトリのmasterから最新版をpullする方法です。  
 
-### limit length
-limit length(文字数上限) can control maximum the length of a chat.
-```
-user A: abcdefghi...z
-user B: こんにちは
-```
-If `limit length = 10`, chats posted by user A will be hidden.
+* 1. githubデスクトップを起動します。  
 
-## Prerequisites
+* 2. 自分のKoreibotリポジトリを選択し、Current branchをクリックします。  
 
-* [node + npm](https://nodejs.org/) (Current Version)
+* 3. New branchをクリックし、バックアップ用のブランチを作成します。  
+  名前はわかりやすいように。
 
-## Setup
+* 4. ブランチを[main]に切り替えます。  
 
-```
-npm install
-```
+* 5. [Fetch Origin]をクリックします。  
 
-## Build
+* 6. [Puch]をクリックします。  
+  ここまでで、自分のリポジトリの[main]と、自PCのソースに最新が反映されてます。  
 
+> **もし不具合があったら...？**  
+>	3項で保存したブランチに切り替えると、自PC側にアップデート前のソースが戻ってきます。  
+>	以後、アップデートがあったら[main]に切り替えて[Fetch]すれば、修正後のソースが反映されます。  
+
+* 7.プロンプトでフォルダチェンジしたあと、ビルドします  
 ```
 npm run build
-```
-
-## Build in watch mode
-
-### terminal
 
 ```
-npm run watch
-```
 
-## Load extension to chrome
-
-Load `dist` directory
-
-## Test
-`npx jest` or `npm run test`
+* 8.ブラウザにインストールします  
+  chromeの場合、「その他のツール」→「拡張機能」を開きます。  
+  競合するので、事前に古いmodは削除します。  
+  
+  デベロッパーモードをONにして、「パッケージされていない拡張機能を読み込む」で dist フォルダを指定すると、modが読まれます。  
 
 
 
 
+# 運用方法 <a name="aHowtoUnyou"></a>
+modekun dashの画面で設定した閾値を超えたコメントが表示除外処理されます。  
+
+> **＜注意事項＞**  
+> コメントが削除されるわけではありません。  
+> また、webのフロントエンドで処理するため、除外処理が遅延することがあるらしいです。  
+> よって、全てのコメントが瞬時に除外されるわけではありません。  
 
 
+## **[Home]**  
+![aaa.jpg](https://bn02pap001files.storage.live.com/y4my3oA2o3_aXy9YbN4NkWkATDAvszr3pn9urmEjgE5z6zSVernypXz3ZoHWFAzjr2czw4OrkDLD10QjA_1Y0n4yns6RPk05rWlt4tF1CocrH4bfuPcmWx-W6rTenWukXEt5cgBULHFK5Ck7tond8u4DuI7uvHmE_3oy62dgVsGsI5kYDqJXr-hNIO8f_kd7dM3?width=640&height=870&cropmode=none)  
+
+基本画面です。  
+この画面では以下の閾値が設定できます。  
+  
+**連投閾値**  
+設定回数以上、同じ文字列のコメントを連投した場合、表示除外します。  
+  
+**単語繰り返し閾値**  
+設定回数を超えた文字のコメントを表示除外します。  
+「ああああ」や「こよこよ」など。  
+  
+**投稿頻度**  
+1回の処理で、1人のユーザが設定回数を超えた回数のコメントがあった場合、表示除外します。  
+  
+**文字数上限**  
+設定以上の文字数のコメントを表示除外します。  
+  
+**制御対象コメント数**  
+1回の処理実行におけるコメント数です。  
+大きければ1回で多くのコメントを処理できますが、後発の処理で除外しきれなくなる可能性があります。  
+コメントのトラヒックに応じて調整してください。  
+  
+**実行間隔**  
+除外処理の実行間隔です。  
+大きいと負荷が少ないですが、1回の処理で除外しきれなくなる可能性があります。  
+コメントのトラヒックに応じて調整してください。  
 
 
+## **[NG Word]**  
+ここで設定されたワードを含むコメントを表示除外します。  
+  
 
 
+## **[Option]**  
+その他の設定です。  
+
+![aaa.jpg](https://bn02pap001files.storage.live.com/y4mPltwchzfJDXPLk5umtjHhik9iVZFlSwTDJaSbwwN7bFLrV6k_iLtj_yrR0BT9HNgFYtwTRn5iCA_T1qdp-4R8U_l0ngqCygtZBDMUEd7ai-K7msDN9Cu1j44MmnWukgHVIDdmjOG-pCwSjOQ-Lx3RpWVGQPZ05HjWCfKZqgJTMnxx3bVDVW0evb0pEzhu571?width=640&height=733&cropmode=none)  
+
+**modekunを有効にする**  
+チェックすると、本modを有効にします。  
+  
+**非表示の理由を表示する**  
+チェックすると、表示除外した場合、除外した列に除外した理由を表示します。  
+  
+**投稿者名をNGワード判定対象にする**  
+チェックすると、NG Wordで設定したワードを含むユーザのコメントを表示除外します。  
+  
+**投稿者名を文字数上限対象にする**  
+チェックすると、文字数上限以上のユーザ名のユーザのコメントを表示除外します。  
+  
+**完全に非表示にする**  
+チェックすると、空欄を開けることなく表示除外します。  
+チャット欄の見た目がスッキリしますが、除外されたことが分かりません。  
 
 
 
