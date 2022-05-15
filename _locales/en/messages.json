@@ -11,6 +11,9 @@
   "maxNumOfCharacters": {
     "message": "max num of characters"
   },
+  "maxNumOfUserCharacters": {
+    "message": "max num of user characters"
+  },
   "numOfControllerdComments": {
     "message": "num of controlled comments"
   },

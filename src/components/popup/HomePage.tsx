@@ -94,6 +94,21 @@ export const HomePage = (props: HomePageProps) => {
         }}
       />
       <RangeSlider
+        label={chrome.i18n.getMessage("maxNumOfUserCharacters")}
+        unitLabel={""}
+        min={1}
+        max={200}
+        step={1}
+        defaultValue={param.lengthThreshold}
+        updateParam={(value: number) => {
+          const newParam: IParameterV2 = {
+            ...param,
+            lengthThreshold: value,
+          };
+          dispatch({ t: "update", param: newParam });
+        }}
+      />
+      <RangeSlider
         label={chrome.i18n.getMessage("numOfControllerdComments")}
         unitLabel={chrome.i18n.getMessage("piece")}
         min={1}

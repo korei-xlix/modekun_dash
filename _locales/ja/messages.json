@@ -11,6 +11,9 @@
   "maxNumOfCharacters": {
     "message": "文字数上限"
   },
+  "maxNumOfUserCharacters": {
+    "message": "ユーザ文字数上限"
+  },
   "numOfControllerdComments": {
     "message": "制御対象コメント数"
   },

@@ -98,11 +98,20 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
-    const isHideAuthor =
-      param.considerAuthorLength && chat.author.length >= param.lengthThreshold;
 
-    if (isHideMessage || isHideAuthor) {
+    if (isHideMessage ) {
       hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
+    }
+  }
+};
+
+export const hideByUserLength = (param: IParameterV2, chats: IChat[]) => {
+  for (const chat of chats) {
+    const isHideAuthor =
+      param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
+
+    if ( isHideAuthor) {
+      hide(param, chrome.i18n.getMessage("maxNumOfUserCharacters"), chat);
     }
   }
 };
@@ -113,6 +122,7 @@ export const moderate = async (
   chats: IChat[]
 ): Promise<void> => {
   hideByLength(param, chats);
+  hideByUserLength(param, chats);
   hideNgWords(param, chats);
   hideRepeatWords(param, kuromojiWorkerApi, chats);
   hideRepeatThrow(param, chats);
