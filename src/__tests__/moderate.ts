@@ -6,6 +6,7 @@ import { IChat } from "../chat";
 import {
   hide,
   hideByLength,
+  hideByUserLength,
   hideNgWords,
   hidePostFlood,
   hideRepeatThrow,
@@ -30,6 +31,7 @@ describe("moderate", () => {
     repeatWordThreshold: 2,
     postFrequencyThreshold: 2,
     lengthThreshold: 3,
+    lengthUserThreshold: 3,
     lookChats: 10,
     executionInterval: 1000,
     ngWords: ["なう"],
