@@ -272,6 +272,81 @@ describe("moderate", () => {
       expect(chats[1].element.dataset.isHiddenByModekun).toBeFalsy();
     });
   });
+
+  describe("hideByUserLength", () => {
+    test("can hide", () => {
+      const chats: IChat[] = [
+        {
+          key: "test1ab",
+          author: "test1",
+          message: "ab",
+          element: document.createElement("div"),
+        },
+        {
+          key: "test1あい",
+          author: "test1",
+          message: "あい",
+          element: document.createElement("div"),
+        },
+        {
+          key: "test1吉吉",
+          author: "test1",
+          message: "吉吉",
+          element: document.createElement("div"),
+        },
+        {
+          key: "test123🔥",
+          author: "test123",
+          message: "🔥",
+          element: document.createElement("div"),
+        },
+        {
+          key: "test1😇😇",
+          author: "test1",
+          message: "😇😇",
+          element: document.createElement("div"),
+        },
+        {
+          key: "test1文字数オーバー",
+          author: "test1",
+          message: "文字数オーバー",
+          element: document.createElement("div"),
+        },
+      ];
+      hideByUserLength(params, chats);
+      expect(chats[0].element.dataset.isHiddenByModekun).toBeFalsy();
+      expect(chats[1].element.dataset.isHiddenByModekun).toBeFalsy();
+      expect(chats[2].element.dataset.isHiddenByModekun).toBeFalsy();
+      expect(chats[3].element.dataset.isHiddenByModekun).toBeFalsy();
+      expect(chats[4].element.dataset.isHiddenByModekun).toBeTruthy();
+      expect(chats[5].element.dataset.isHiddenByModekun).toBeTruthy();
+    });
+    test("can hide by author", () => {
+      const chats: IChat[] = [
+        {
+          key: "test123ab",
+          author: "test123",
+          message: "ab",
+          element: document.createElement("div"),
+        },
+        {
+          key: "testab",
+          author: "test",
+          message: "ab",
+          element: document.createElement("div"),
+        },
+      ];
+      const param: IParameterV2 = {
+        ...params,
+        lengthThreshold: 5,
+        considerAuthorLength: true,
+      };
+      hideByUserLength(param, chats);
+      expect(chats[0].element.dataset.isHiddenByModekun).toBeTruthy();
+      expect(chats[1].element.dataset.isHiddenByModekun).toBeFalsy();
+    });
+  });
+
   describe("repeat post and repeat frequency", () => {
     const chats: IChat[] = [
       {

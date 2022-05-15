@@ -28,6 +28,7 @@ export const HomePage = (props: HomePageProps) => {
     param.repeatWordThreshold,
     param.postFrequencyThreshold,
     param.lengthThreshold,
+    param.lengthUserThreshold,
     param.lookChats,
     param.executionInterval,
   ]);
@@ -99,11 +100,11 @@ export const HomePage = (props: HomePageProps) => {
         min={1}
         max={200}
         step={1}
-        defaultValue={param.lengthThreshold}
+        defaultValue={param.lengthUserThreshold}
         updateParam={(value: number) => {
           const newParam: IParameterV2 = {
             ...param,
-            lengthThreshold: value,
+            lengthUserThreshold: value,
           };
           dispatch({ t: "update", param: newParam });
         }}
