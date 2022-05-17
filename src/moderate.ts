@@ -99,6 +99,7 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
   let dst_len, dst_index, dst_code ;
+  let dst_len12, dst_len34 ;
 
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
@@ -112,21 +113,40 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
     }
     else if (isHideEmoji ) {
 
+      const trim_str11 = chat.message.trim() ;
       const trim_str = chat.message ;
       const src_len = trim_str.length ;
+
+      const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+
+      const regex1 = /[\uD800-\uDBFF]/g;
+      const regex2 = /[\uDC00-\uDFFF]/g;
+
+      const regex3 = /[A-Z]/g;
+      const regex4 = /[a-z]/g;
+
+      const res_match1 = trim_str.match( regex1 )||[] ;
+      const res_match2 = trim_str.match( regex2 )||[] ;
+      dst_len12 = res_match1.length + res_match2.length ;
+
+      const res_match3 = trim_str.match( regex3 )||[] ;
+      const res_match4 = trim_str.match( regex4 )||[] ;
+      dst_len34 = res_match3.length + res_match4.length ;
+
       dst_len = 0 ;
       for ( dst_index = 0 ; src_len > dst_index ; dst_index++ ) {
-        dst_code = chat.message.charAt( dst_index ) ;
-        if ( dst_code == ":" ) {
+        dst_code = chat.message.charCodeAt( dst_index ) ;
+
+        if(( 55296 <= dst_code ) && ( 56319 >= dst_code )) {
+          dst_len++ ;
+        }
+        else if (( 56320 <= dst_code ) && ( 57343 >= dst_code )) {
           dst_len++ ;
         }
         if( dst_len >= 2 ) {
+          hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
           break ;
         }
-      }
-      if( dst_len >= 2 ) {
-        param.isHideEmojiComment = true ;
-        hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
       }
 
     }
