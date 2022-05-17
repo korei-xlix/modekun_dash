@@ -38,9 +38,7 @@ describe("moderate", () => {
     isActivateModekun: true,
     considerAuthorLength: false,
     considerAuthorNgWord: false,
-    considerHiddenEmoji: false,
     isHideCompletely: false,
-    isHideEmojiComment: false,
   };
   describe("hideRepeatWords", () => {
     const chats: IChat[] = [

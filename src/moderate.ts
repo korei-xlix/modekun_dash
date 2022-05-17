@@ -98,26 +98,13 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
-  const Emoji = require('node-emoji');
-
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
     const isHideAuthor =
       param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
-    const isHideEmoji = param.considerHiddenEmoji;
 
-    param.isHideEmojiComment = false ;
     if (isHideMessage || isHideAuthor ) {
       hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
-    }
-    else if (isHideEmoji ) {
-
-      const isEmoji = Emoji.hasEmoji( chat.message ) ;
-      if( isEmoji ) {
-        param.isHideEmojiComment = true ;
-        hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
-      }
-
     }
 
   }
@@ -140,7 +127,7 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
 
   chat.element.dataset.isHiddenByModekun = "1";
 
-  if (param.isHideCompletely || param.isHideEmojiComment) {
+  if (param.isHideCompletely ) {
     chat.element.style.display = "none";
     if (chat.associatedElements) {
       for (const element of chat.associatedElements) {

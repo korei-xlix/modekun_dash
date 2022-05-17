@@ -14,7 +14,6 @@ export const KEY_IS_SHOW_REASON = "is_show_reason";
 export const KEY_IS_ACTIVATE = "is_activate_modekun";
 export const KEY_CONSIDER_AUTHOR_NGWORD = "consider_author_ngword";
 export const KEY_CONSIDER_AUTHOR_LENGTH = "consider_author_length";
-export const KEY_CONSIDER_HIDDEN_EMOJI = "consider_hidden_emoji";
 export const KEY_IS_HIDE_COMPLETELY = "is_hide_completely";
 
 export const paramKeys = () => {
@@ -31,7 +30,6 @@ export const paramKeys = () => {
     KEY_IS_ACTIVATE,
     KEY_CONSIDER_AUTHOR_NGWORD,
     KEY_CONSIDER_AUTHOR_LENGTH,
-    KEY_CONSIDER_HIDDEN_EMOJI,
     KEY_IS_HIDE_COMPLETELY,
   ];
 };
@@ -49,7 +47,6 @@ const DEFAULT_CONSIDER_AUTHOR_NGWORD = false;
 const DEFAULT_CONSIDER_AUTHOR_LENGTH = true;
 const DEFAULT_CONSIDER_HIDDEN_EMOJI = false;
 const DEFAULT_IS_HIDE_COMPLETELY = false;
-const DEFAULT_IS_HIDE_EMOJI_COMMENT = false;
 
 export const DEFAULT_EXECUTION_INTERVAL_MS = 1000;
 export const OBSERVATION_INTERVAL_MS = 50;
@@ -71,7 +68,6 @@ export const defaultParams: IParameter = {
   [KEY_IS_ACTIVATE]: DEFAULT_IS_ACTIVATE,
   [KEY_CONSIDER_AUTHOR_NGWORD]: DEFAULT_CONSIDER_AUTHOR_NGWORD,
   [KEY_CONSIDER_AUTHOR_LENGTH]: DEFAULT_CONSIDER_AUTHOR_LENGTH,
-  [KEY_CONSIDER_HIDDEN_EMOJI]: DEFAULT_CONSIDER_HIDDEN_EMOJI,
   [KEY_IS_HIDE_COMPLETELY]: DEFAULT_IS_HIDE_COMPLETELY,
 };
 
@@ -88,7 +84,6 @@ export interface IParameter {
   is_activate_modekun: boolean;
   consider_author_ngword: boolean;
   consider_author_length: boolean;
-  consider_hidden_emoji: boolean;
   is_hide_completely: boolean;
 }
 
@@ -105,9 +100,7 @@ export interface IParameterV2 {
   isActivateModekun: boolean;
   considerAuthorNgWord: boolean;
   considerAuthorLength: boolean;
-  considerHiddenEmoji: boolean;
   isHideCompletely: boolean;
-  isHideEmojiComment: boolean;
 }
 
 export const defaultParamsV2: IParameterV2 = {
@@ -123,9 +116,7 @@ export const defaultParamsV2: IParameterV2 = {
   isActivateModekun: DEFAULT_IS_ACTIVATE,
   considerAuthorNgWord: DEFAULT_CONSIDER_AUTHOR_NGWORD,
   considerAuthorLength: DEFAULT_CONSIDER_AUTHOR_LENGTH,
-  considerHiddenEmoji: DEFAULT_CONSIDER_HIDDEN_EMOJI,
   isHideCompletely: DEFAULT_IS_HIDE_COMPLETELY,
-  isHideEmojiComment: DEFAULT_IS_HIDE_EMOJI_COMMENT,
 };
 
 export const isParameter = (arg: any): arg is IParameter => {
@@ -142,7 +133,6 @@ export const isParameter = (arg: any): arg is IParameter => {
     arg.is_activate_modekun !== undefined &&
     arg.consider_author_ngword !== undefined &&
     arg.consider_author_length !== undefined &&
-    arg.consider_hidden_emoji !== undefined &&
     arg.is_hide_completely !== undefined
   );
 };
