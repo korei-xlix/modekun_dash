@@ -2,14 +2,14 @@
   "manifest_version": 3,
 
   "name": "modekun dash",
-  "description": "moderate live chat",
-  "version": "1.1.2",
+  "description": "moderate live chat (for korei version)",
+  "version": "1.2.0",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'"
   },
 
   "action": {
-    "default_title": "modekun",
+    "default_title": "modekun dash",
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",
@@ -52,8 +52,6 @@
         "https://www.google.co.jp/*"
       ],
       "extension_ids": [
-        "lnlgicokoimnfncigoknlbiicjfbbejp",
-        "gledinelblgphiogdfalpkobganffpem"
       ]
     }
   ],

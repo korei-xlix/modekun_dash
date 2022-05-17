@@ -3,6 +3,8 @@ import { wrap } from "comlink";
 import { IParameterV2 } from "./config";
 import { IKuromojiWorker } from "./kuromoji";
 
+const emojiRegex = require('emoji-regex');
+
 export const createKuromojiWorker = async (): Promise<Worker> => {
   const worker = await fetch(chrome.runtime.getURL("js/worker.js"));
   const js = await worker.text();
@@ -96,23 +98,28 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 };
 
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
+  const emreg = emojiRegex();
+
+  var regtext, match ;
+
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
-
-    if (isHideMessage ) {
-      hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
-    }
-  }
-};
-
-export const hideByUserLength = (param: IParameterV2, chats: IChat[]) => {
-  for (const chat of chats) {
     const isHideAuthor =
       param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
+    const isHideEmoji = param.considerHiddenEmoji;
 
-    if ( isHideAuthor) {
-      hide(param, chrome.i18n.getMessage("maxNumOfUserCharacters"), chat);
+    param.isHideEmojiComment = false ;
+    if (isHideMessage || isHideAuthor ) {
+      hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
     }
+    else if (isHideEmoji ) {
+      if ( chat.message.length > 0 ) {
+        param.isHideEmojiComment = true ;
+      }
+
+      hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
+    }
+
   }
 };
 
@@ -122,7 +129,6 @@ export const moderate = async (
   chats: IChat[]
 ): Promise<void> => {
   hideByLength(param, chats);
-  hideByUserLength(param, chats);
   hideNgWords(param, chats);
   hideRepeatWords(param, kuromojiWorkerApi, chats);
   hideRepeatThrow(param, chats);
@@ -134,7 +140,7 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
 
   chat.element.dataset.isHiddenByModekun = "1";
 
-  if (param.isHideCompletely) {
+  if (param.isHideCompletely || param.isHideEmojiComment) {
     chat.element.style.display = "none";
     if (chat.associatedElements) {
       for (const element of chat.associatedElements) {

@@ -50,6 +50,12 @@
   "includePosterInLimitChars": {
     "message": "投稿者名を文字数上限対象にする"
   },
+  "hiddenEmojiChars": {
+    "message": "連続した絵文字を対象にする"
+  },
+  "hiddeEmojiComment": {
+    "message": "連続した絵文字"
+  },
   "isHideCompletely": {
     "message": "完全に非表示にする"
   },

@@ -1,6 +1,6 @@
 {
-  "name": "modekun",
-  "version": "1.0.0",
+  "name": "modekun dash",
+  "version": "1.2.0",
   "description": "moderate live chat",
   "main": "index.js",
   "scripts": {
@@ -45,5 +45,8 @@
     "webpack": "5.51.1",
     "webpack-cli": "4.8.0",
     "webpack-merge": "5.8.0"
+  },
+  "dependencies": {
+    "emoji-regex": "^10.1.0"
   }
 }
