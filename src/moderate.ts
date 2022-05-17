@@ -3,8 +3,6 @@ import { wrap } from "comlink";
 import { IParameterV2 } from "./config";
 import { IKuromojiWorker } from "./kuromoji";
 
-const emojiRegex = require('emoji-regex');
-
 export const createKuromojiWorker = async (): Promise<Worker> => {
   const worker = await fetch(chrome.runtime.getURL("js/worker.js"));
   const js = await worker.text();
@@ -97,10 +95,10 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
   }
 };
 
-export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
-  const emreg = emojiRegex();
 
-  var regtext, match ;
+export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
+
+  const Emoji = require('node-emoji');
 
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
@@ -113,11 +111,13 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
       hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
     }
     else if (isHideEmoji ) {
-      if ( chat.message.length > 0 ) {
+
+      const isEmoji = Emoji.hasEmoji( chat.message ) ;
+      if( isEmoji ) {
         param.isHideEmojiComment = true ;
+        hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
       }
 
-      hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
     }
 
   }

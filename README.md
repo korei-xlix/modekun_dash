@@ -100,7 +100,7 @@ npm --version
 ```
 このコマンドは初回だけでOKです
 npm install
-npm install emoji-regex
+npm install --save node-emoji
 
 これはビルドコマンドです
 npm run build
@@ -245,6 +245,9 @@ modekun dashの画面で設定した閾値を超えたコメントが表示除�
 **※敬称略**  
 * [Node.js / npmをインストールする（for Windows）](https://qiita.com/taiponrock/items/9001ae194571feb63a5e)
 
+
+
+https://qiita.com/turmericN/items/33ba9bcd8bed2a63f119
 
 
 # 謝辞 <a name="aAcknowledgments"></a>
