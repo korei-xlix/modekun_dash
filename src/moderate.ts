@@ -98,7 +98,8 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
-  const Emoji = require('node-emoji');
+  const locale_desu = new Intl.Locale('ja-JP') ;
+  const it_desu = new Intl.v8BreakIterator(locale_desu, {type: 'character'});
 
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
@@ -112,9 +113,19 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
     }
     else if (isHideEmoji ) {
 
-      const isEmoji = Emoji.hasEmoji( chat.message ) ;
-      if( isEmoji ) {
-        param.isHideEmojiComment = true ;
+      it_desu.adoptText( chat.message ) ;
+      const len_desu = 0;
+      const previous = 0;
+      const curr_desu = it.first();
+      while (curr_desu !== -1) {
+        const curr_desu = it.next();
+        if (curr_desu === -1) {
+          break;
+        }
+        const previous = curr_desu;
+        const len_desu = len_desu + 1;
+      }
+      if( len_desu>2 ) {
         hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
       }
 
