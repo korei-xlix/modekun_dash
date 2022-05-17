@@ -100,7 +100,6 @@ npm --version
 ```
 このコマンドは初回だけでOKです
 npm install
-npm install --save node-emoji
 
 これはビルドコマンドです
 npm run build
