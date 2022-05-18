@@ -102,21 +102,16 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
   const strReason1 = chrome.i18n.getMessage("maxNumOfCharacters") ;
   const strReason2 = chrome.i18n.getMessage("hiddeEmojiComment") ;
-  const strPattern = /\\:/g;
+  const strPattern = /\<img/g;
 
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
     const isHideAuthor =
       param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
-    const dstCount = ( chat.message.match(strPattern) || [] ).length;
 
     if( param.outputDebugLog ) {
-      console.error( "recive: " + chat.message );
-
-      if( param.considerHiddenEmoji ) {
-        console.error( "emoji count: " + dstCount );
-      }
-
+      console.error( "recive: " + chat.author + ": " + chat.message + ": len=" + chat.message.length);
+      console.error( "object: " + JSON.stringify(chat) );
     }
 
     strReason = strReason1 ;
@@ -124,10 +119,17 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
     if (isHideMessage || isHideAuthor ) {
       isHidden = true;
 
-    } else if(( param.considerHiddenEmoji ) && ( dstCount >= 1 )) {
+    } else if( param.considerHiddenEmoji ) {
+      const dstCount = ( chat.htmlcode.match(strPattern) || [] ).length;
 
-      strReason = strReason2 ;
-      isHidden = true;
+      if( param.outputDebugLog ) {
+        console.error( "hits: " + dstCount );
+      }
+
+      if( dstCount >= 2 ) {
+        strReason = strReason2 ;
+        isHidden = true;
+      }
     }
     if( isHidden ) {
       hide(param, strReason, chat);

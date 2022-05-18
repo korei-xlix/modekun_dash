@@ -51,10 +51,10 @@
     "message": "Include poster name in max num of characters"
   },
   "hiddenEmojiChars": {
-    "message": "Target consecutive emoji"
+    "message": "Target two or more emojis"
   },
   "hiddeEmojiComment": {
-    "message": "Hide Emoji comment"
+    "message": "2 or more emoji"
   },
   "isHideCompletely": {
     "message": "hide comments completely"
