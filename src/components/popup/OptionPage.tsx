@@ -60,7 +60,9 @@ export const OptionPage = (props: OptionPageProps) => {
     param.isShowReason,
     param.considerAuthorNgWord,
     param.considerAuthorLength,
+    param.considerHiddenEmoji,
     param.isHideCompletely,
+    param.outputDebugLog,
   ]);
   return (
     <StyledContainer>
@@ -123,6 +125,20 @@ export const OptionPage = (props: OptionPageProps) => {
         </StyledLi>
         <StyledLi>
           <CheckBox
+            id={"consider-hidden-emoji"}
+            label={chrome.i18n.getMessage("hiddenEmojiChars")}
+            defaultChecked={param.considerHiddenEmoji}
+            updateParam={(checked: boolean) => {
+              const newParam: IParameterV2 = {
+                ...param,
+                considerHiddenEmoji: checked,
+              };
+              dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
             id={"is-hide-completely"}
             label={chrome.i18n.getMessage("isHideCompletely")}
             defaultChecked={param.isHideCompletely}
@@ -130,6 +146,20 @@ export const OptionPage = (props: OptionPageProps) => {
               const newParam: IParameterV2 = {
                 ...param,
                 isHideCompletely: checked,
+              };
+              dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
+            id={"output-debug-log"}
+            label={chrome.i18n.getMessage("outputDebugLog")}
+            defaultChecked={param.outputDebugLog}
+            updateParam={(checked: boolean) => {
+              const newParam: IParameterV2 = {
+                ...param,
+                outputDebugLog: checked,
               };
               dispatch({ t: "update", param: newParam });
             }}

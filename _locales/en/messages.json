@@ -50,8 +50,17 @@
   "includePosterInLimitChars": {
     "message": "Include poster name in max num of characters"
   },
+  "hiddenEmojiChars": {
+    "message": "Target two or more emojis"
+  },
+  "hiddeEmojiComment": {
+    "message": "2 or more emoji"
+  },
   "isHideCompletely": {
     "message": "hide comments completely"
+  },
+  "outputDebugLog": {
+    "message": "output debug log"
   },
 
   "repeatPost": {

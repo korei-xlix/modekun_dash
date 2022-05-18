@@ -38,7 +38,10 @@ describe("moderate", () => {
     isActivateModekun: true,
     considerAuthorLength: false,
     considerAuthorNgWord: false,
+    considerHiddenEmoji: false,
     isHideCompletely: false,
+    outputDebugLog: false,
+    isHideEmoji: false,
   };
   describe("hideRepeatWords", () => {
     const chats: IChat[] = [
@@ -46,12 +49,14 @@ describe("moderate", () => {
         key: "test1こんにちは",
         author: "test1",
         message: "こんにちは",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test2最高最高最高",
         author: "test2",
         message: "最高最高最高",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
     ];
@@ -78,24 +83,28 @@ describe("moderate", () => {
         key: "test1こんにちは",
         author: "test1",
         message: "こんにちは",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test2連投",
         author: "test2",
         message: "連投",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test2連投",
         author: "test2",
         message: "連投",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test2連投",
         author: "test2",
         message: "連投",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
     ];
@@ -115,24 +124,28 @@ describe("moderate", () => {
           key: "test1こんにちは",
           author: "test1",
           message: "こんにちは",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test2なう",
           author: "test2",
           message: "なう",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test3なうい",
           author: "test3",
           message: "なうい",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test4ないた",
           author: "test4",
           message: "ないた",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
       ];
@@ -148,12 +161,14 @@ describe("moderate", () => {
           key: "こんにちはtest",
           author: "こんにちは",
           message: "test",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "なうtest",
           author: "なう",
           message: "test",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
       ];
@@ -173,18 +188,21 @@ describe("moderate", () => {
         key: "test1こんにちは",
         author: "test1",
         message: "こんにちは",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test1こんにち",
         author: "test1",
         message: "こんにち",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test2こんにちは",
         author: "test2",
         message: "こんにちは",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
     ];
@@ -204,36 +222,42 @@ describe("moderate", () => {
           key: "test1ab",
           author: "test1",
           message: "ab",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test1あい",
           author: "test1",
           message: "あい",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test1吉吉",
           author: "test1",
           message: "吉吉",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test123🔥",
           author: "test123",
           message: "🔥",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test1😇😇",
           author: "test1",
           message: "😇😇",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "test1文字数オーバー",
           author: "test1",
           message: "文字数オーバー",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
       ];
@@ -252,12 +276,14 @@ describe("moderate", () => {
           key: "test123ab",
           author: "test123",
           message: "ab",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
         {
           key: "testab",
           author: "test",
           message: "ab",
+          htmlcode: "こんにちは",
           element: document.createElement("div"),
         },
       ];
@@ -278,18 +304,21 @@ describe("moderate", () => {
         key: "test1aaa",
         author: "test1",
         message: "aaa",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test1aaa",
         author: "test1",
         message: "aaa",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
       {
         key: "test1bbb",
         author: "test1",
         message: "bbb",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       },
     ];
@@ -312,6 +341,7 @@ describe("moderate", () => {
         key: "test1aaa",
         author: "test1",
         message: "aaa",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       };
       hide(params, "test", chat);
@@ -327,6 +357,7 @@ describe("moderate", () => {
         key: "test1aaa",
         author: "test1",
         message: "aaa",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
       };
       hide(param, "test", chat);
@@ -342,6 +373,7 @@ describe("moderate", () => {
         key: "test1aaa",
         author: "test1",
         message: "aaa",
+        htmlcode: "こんにちは",
         element: document.createElement("div"),
         associatedElements: [document.createElement("div")],
       };

@@ -30,6 +30,7 @@ export const Mildom: ISource = {
         key: parsedChat.author + parsedChat.message,
         author: parsedChat.author,
         message: parsedChat.message,
+        htmlcode: parsedChat.message,
         element: chatBlock,
       });
     }

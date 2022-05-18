@@ -42,11 +42,13 @@ export const Youtube: ISource = {
 
       const author = authorElement.innerText;
       const message = messageElement.innerText;
+      const htmlcode = messageElement.innerHTML;
       const key = removeSymbols(kanaToHiragana(author + message));
       chats.push({
         key: key,
         author: author,
         message: message,
+        htmlcode: htmlcode,
         element: chatBlock,
         associatedElements: chatBlock.parentElement
           ? [chatBlock.parentElement]
