@@ -107,7 +107,6 @@ export interface IParameterV2 {
   considerAuthorLength: boolean;
   considerHiddenEmoji: boolean;
   isHideCompletely: boolean;
-  isHideEmojiComment: boolean;
 }
 
 export const defaultParamsV2: IParameterV2 = {
@@ -125,7 +124,6 @@ export const defaultParamsV2: IParameterV2 = {
   considerAuthorLength: DEFAULT_CONSIDER_AUTHOR_LENGTH,
   considerHiddenEmoji: DEFAULT_CONSIDER_HIDDEN_EMOJI,
   isHideCompletely: DEFAULT_IS_HIDE_COMPLETELY,
-  isHideEmojiComment: DEFAULT_IS_HIDE_EMOJI_COMMENT,
 };
 
 export const isParameter = (arg: any): arg is IParameter => {
