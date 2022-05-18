@@ -98,27 +98,39 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
+  let strReason, isHidden ;
+
+  const strReason1 = chrome.i18n.getMessage("maxNumOfCharacters") ;
+  const strReason2 = chrome.i18n.getMessage("hiddeEmojiComment") ;
+  const strPattern = /\\:/g;
+
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
     const isHideAuthor =
       param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
+    const dstCount = ( chat.message.match(strPattern) || [] ).length;
 
-    if (isHideMessage || isHideAuthor ) {
-      hide(param, chrome.i18n.getMessage("maxNumOfCharacters"), chat);
+    if( param.outputDebugLog ) {
+      console.error( "recive: " + chat.message );
+
+      if( param.considerHiddenEmoji ) {
+        console.error( "emoji count: " + dstCount );
+      }
+
     }
 
-  }
-};
+    strReason = strReason1 ;
+    isHidden = false;
+    if (isHideMessage || isHideAuthor ) {
+      isHidden = true;
 
+    } else if(( param.considerHiddenEmoji ) && ( dstCount >= 1 )) {
 
-export const hideByEmoji = (param: IParameterV2, chats: IChat[]) => {
-  if( param.considerHiddenEmoji==false ) return ;
-
-  for (const chat of chats) {
-
-    const dst_count = chat.message.indexOf(':') ;
-    if( dst_count >= 0 ) {
-      hide(param, chrome.i18n.getMessage("hiddeEmojiComment"), chat);
+      strReason = strReason2 ;
+      isHidden = true;
+    }
+    if( isHidden ) {
+      hide(param, strReason, chat);
     }
 
   }
@@ -131,7 +143,6 @@ export const moderate = async (
   chats: IChat[]
 ): Promise<void> => {
   hideByLength(param, chats);
-  hideByEmoji(param, chats);
   hideNgWords(param, chats);
   hideRepeatWords(param, kuromojiWorkerApi, chats);
   hideRepeatThrow(param, chats);
@@ -143,6 +154,7 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
 
   chat.element.dataset.isHiddenByModekun = "1";
 
+
   if (param.isHideCompletely) {
     chat.element.style.display = "none";
     if (chat.associatedElements) {
@@ -151,8 +163,8 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
       }
     }
   } else {
-    chat.element.style.opacity = "0";
 
+    chat.element.style.opacity = "0";
     const reasonLabel = param.isShowReason
       ? document.createElement("span")
       : null;
@@ -172,6 +184,8 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
       chat.element.style.opacity = "0";
       if (reasonLabel) reasonLabel.style.display = "inline";
     });
+
   }
+
 };
 

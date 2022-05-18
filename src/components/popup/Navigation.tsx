@@ -70,7 +70,7 @@ export const Navigation = () => {
         />
         <NavigationItem
           to={"/option"}
-          label={"option"}
+          label={"Option"}
           onClick={() => setCurrent("/option")}
           isSelected={current === "/option"}
         />

@@ -40,6 +40,8 @@ describe("moderate", () => {
     considerAuthorNgWord: false,
     considerHiddenEmoji: false,
     isHideCompletely: false,
+    outputDebugLog: false,
+    isHideEmoji: false,
   };
   describe("hideRepeatWords", () => {
     const chats: IChat[] = [

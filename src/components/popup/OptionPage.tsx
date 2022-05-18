@@ -62,6 +62,7 @@ export const OptionPage = (props: OptionPageProps) => {
     param.considerAuthorLength,
     param.considerHiddenEmoji,
     param.isHideCompletely,
+    param.outputDebugLog,
   ]);
   return (
     <StyledContainer>
@@ -145,6 +146,20 @@ export const OptionPage = (props: OptionPageProps) => {
               const newParam: IParameterV2 = {
                 ...param,
                 isHideCompletely: checked,
+              };
+              dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
+            id={"output-debug-log"}
+            label={chrome.i18n.getMessage("outputDebugLog")}
+            defaultChecked={param.outputDebugLog}
+            updateParam={(checked: boolean) => {
+              const newParam: IParameterV2 = {
+                ...param,
+                outputDebugLog: checked,
               };
               dispatch({ t: "update", param: newParam });
             }}

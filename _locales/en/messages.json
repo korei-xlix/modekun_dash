@@ -59,6 +59,9 @@
   "isHideCompletely": {
     "message": "hide comments completely"
   },
+  "outputDebugLog": {
+    "message": "output debug log"
+  },
 
   "repeatPost": {
     "message": "repeat post"
