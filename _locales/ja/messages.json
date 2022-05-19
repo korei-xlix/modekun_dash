@@ -62,6 +62,12 @@
   "outputDebugLog": {
     "message": "コンソールにデバッグログを出す"
   },
+  "isUseSameParam": {
+    "message": "共通のパラメータを使用する"
+  },
+  "reload": {
+    "message": "設定を反映させるために再起動します"
+  },
 
   "repeatPost": {
     "message": "連投"

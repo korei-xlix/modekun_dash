@@ -57,7 +57,13 @@
     "message": "2 or more emoji"
   },
   "isHideCompletely": {
-    "message": "hide comments completely"
+    "message": "Hide comments completely"
+  },
+  "isUseSameParam": {
+    "message": "Use common parameters"
+  },
+  "reload": {
+    "message": "Reload to apply change"
   },
   "outputDebugLog": {
     "message": "output debug log"

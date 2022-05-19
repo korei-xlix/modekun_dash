@@ -38,7 +38,7 @@ export const Mock: ISource = {
   },
   extractStreamer() {
     const streamer: Streamer = {
-      name: "hello",
+      name: document.title,
     };
     return streamer;
   },

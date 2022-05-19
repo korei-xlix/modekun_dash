@@ -1,6 +1,7 @@
 import { getItems } from "./storage";
 import { Streamer } from "./streamer";
 import md5 from "md5";
+import { ISource } from "./source/source";
 
 export const KEY_REPEAT_THROW = "repeat_throw_threshold";
 export const KEY_REPEAT_WORD = "repeat_word_threshold";
@@ -53,6 +54,8 @@ const DEFAULT_CONSIDER_HIDDEN_EMOJI = false;
 const DEFAULT_IS_HIDE_COMPLETELY = false;
 const DEFAULT_OUTPUT_DEBUG_LOG = false;
 const DEFAULT_IS_HIDE_EMOJI = false;
+
+export const DEFAULT_IS_USE_SAME_PARAM = false;
 
 export const DEFAULT_EXECUTION_INTERVAL_MS = 1000;
 export const OBSERVATION_INTERVAL_MS = 50;
@@ -173,3 +176,5 @@ export const keyStreamer = (sourceName: string, streamer: Streamer): string => {
   const hashedName = md5(streamer.name);
   return `modekun-${sourceName}-${hashedName}`;
 };
+
+export const keyIsUseSameParam = "modekun-is-use-same-param";

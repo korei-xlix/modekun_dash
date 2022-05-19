@@ -2,8 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { CheckBox } from "./CheckBox";
 import { IParameterV2 } from "../../config";
-import { PopupDispatch, updateParam } from "../../popup";
-import { sendRequestToContent } from "../../message";
+import {
+  PopupDispatch,
+  reloadNotification,
+  updateIsUseSameParam,
+  updateParam,
+} from "../../popup";
 
 const StyledContainer = styled.div`
   width: 320px;
@@ -49,10 +53,11 @@ const StyledLi = styled.li`
 
 interface OptionPageProps {
   param: IParameterV2;
+  isUseSameParam: boolean;
   dispatch: PopupDispatch;
 }
 export const OptionPage = (props: OptionPageProps) => {
-  const { param, dispatch } = props;
+  const { param, isUseSameParam, dispatch } = props;
   useEffect(() => {
     updateParam(param);
   }, [
@@ -162,6 +167,23 @@ export const OptionPage = (props: OptionPageProps) => {
                 outputDebugLog: checked,
               };
               dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
+            id={"is-use-same-param"}
+            label={chrome.i18n.getMessage("isUseSameParam")}
+            defaultChecked={isUseSameParam}
+            updateParam={async (checked: boolean) => {
+              dispatch({
+                t: "update-is-use-same-param",
+                isUseSameParam: checked,
+              });
+              await updateIsUseSameParam(checked);
+              await reloadNotification();
+              window.alert(chrome.i18n.getMessage("reload"));
+              window.close();
             }}
           />
         </StyledLi>
