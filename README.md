@@ -47,7 +47,6 @@ modekun dashの画面で設定した閾値を超えたコメントが表示除�
 # 前提 <a name="aPremise"></a>
 * nodejs
 * npm
-* emoji-regex(npm)
 
 
 
