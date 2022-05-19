@@ -38,6 +38,9 @@ modekun dashの画面で設定した閾値を超えたコメントが表示除�
 * 文字数上限除外を、コメント文字数とユーザ名別々に設定できる。  
 * 2個以上の絵文字を含むコメントを除外できる。  
 * デバックログ出力。（開発用）  
+  
+なおオリジナルとブランチを切り離してるため、動作や仕様が異なっている場合があります。  
+
 
 
 
@@ -260,9 +263,11 @@ modekun dashの画面で設定した閾値を超えたコメントが表示除�
 
 
 
+
 # 参考記事 <a name="aReference"></a>
 **※敬称略**  
 * [Node.js / npmをインストールする（for Windows）](https://qiita.com/taiponrock/items/9001ae194571feb63a5e)
+
 
 
 
@@ -272,7 +277,9 @@ https://qiita.com/turmericN/items/33ba9bcd8bed2a63f119
 # 謝辞 <a name="aAcknowledgments"></a>
 **※敬称略**  
 * [momochi29（for fork souse master）](https://github.com/tjmtmmnk)  
+  オリジナルのmodekunの開発者さんです。  
   source : [https://github.com/tjmtmmnk/modekun](https://github.com/tjmtmmnk/modekun)
+
 
 
 

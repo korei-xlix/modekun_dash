@@ -129,7 +129,7 @@ export const defaultParamsV2: IParameterV2 = {
   isActivateModekun: DEFAULT_IS_ACTIVATE,
   considerAuthorNgWord: DEFAULT_CONSIDER_AUTHOR_NGWORD,
   considerAuthorLength: DEFAULT_CONSIDER_AUTHOR_LENGTH,
-  considerHiddenEmoji: DEFAULT_CONSIDER_AUTHOR_LENGTH,
+  considerHiddenEmoji: DEFAULT_CONSIDER_HIDDEN_EMOJI,
   isHideCompletely: DEFAULT_IS_HIDE_COMPLETELY,
   outputDebugLog: DEFAULT_OUTPUT_DEBUG_LOG,
   isHideEmoji: DEFAULT_IS_HIDE_EMOJI,

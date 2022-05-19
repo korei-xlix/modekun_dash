@@ -3,7 +3,7 @@
 
   "name": "modekun dash",
   "description": "moderate live chat (for korei version)",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'"
   },
