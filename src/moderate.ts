@@ -34,6 +34,8 @@ export const hideRepeatThrow = (param: IParameterV2, chats: IChat[]) => {
     duplicateCount[chat.key]++;
   }
   for (const chat of chats) {
+    if( chat.other.isCard ) continue;
+
     if (duplicateCount[chat.key] >= param.repeatPostThreshold) {
       hide(param, chrome.i18n.getMessage("repeatPost"), chat);
     }
