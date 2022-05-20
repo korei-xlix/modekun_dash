@@ -30,8 +30,15 @@ export const Mildom: ISource = {
         key: parsedChat.author + parsedChat.message,
         author: parsedChat.author,
         message: parsedChat.message,
-        htmlcode: parsedChat.message,
         element: chatBlock,
+        other: {
+          isCard : false,
+          isOwner : false,
+          isMember : false,
+          isModer : false,
+          amount : "",
+          img_nums : 0,
+        },
       });
     }
     return chats;

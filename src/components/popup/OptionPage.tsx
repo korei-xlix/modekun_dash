@@ -66,6 +66,8 @@ export const OptionPage = (props: OptionPageProps) => {
     param.considerAuthorNgWord,
     param.considerAuthorLength,
     param.considerHiddenEmoji,
+    param.considerHiddenSuperChat,
+    param.considerMemberOnly,
     param.isHideCompletely,
     param.outputDebugLog,
   ]);
@@ -137,6 +139,34 @@ export const OptionPage = (props: OptionPageProps) => {
               const newParam: IParameterV2 = {
                 ...param,
                 considerHiddenEmoji: checked,
+              };
+              dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
+            id={"consider-hidden-super-chat"}
+            label={chrome.i18n.getMessage("superChatCard")}
+            defaultChecked={param.considerHiddenSuperChat}
+            updateParam={(checked: boolean) => {
+              const newParam: IParameterV2 = {
+                ...param,
+                considerHiddenSuperChat: checked,
+              };
+              dispatch({ t: "update", param: newParam });
+            }}
+          />
+        </StyledLi>
+        <StyledLi>
+          <CheckBox
+            id={"consider-member-only"}
+            label={chrome.i18n.getMessage("memberOnlyChat")}
+            defaultChecked={param.considerMemberOnly}
+            updateParam={(checked: boolean) => {
+              const newParam: IParameterV2 = {
+                ...param,
+                considerMemberOnly: checked,
               };
               dispatch({ t: "update", param: newParam });
             }}

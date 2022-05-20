@@ -56,6 +56,12 @@
   "hiddeEmojiComment": {
     "message": "2個以上の絵文字"
   },
+  "memberOnlyChat": {
+    "message": "メンバー以外を対象にする"
+  },
+  "superChatCard": {
+    "message": "スーパーチャットを対象にする"
+  },
   "isHideCompletely": {
     "message": "完全に非表示にする"
   },

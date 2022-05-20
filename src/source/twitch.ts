@@ -46,9 +46,16 @@ export const Twitch: ISource = {
         key: key,
         author: author,
         message: message,
-        htmlcode: message,
         element: chatBlock,
         associatedElements: associatedElements,
+        other: {
+          isCard : false,
+          isOwner : false,
+          isMember : false,
+          isModer : false,
+          amount : "",
+          img_nums : 0,
+        },
       });
     });
 

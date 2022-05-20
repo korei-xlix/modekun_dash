@@ -16,6 +16,8 @@ export const KEY_IS_ACTIVATE = "is_activate_modekun";
 export const KEY_CONSIDER_AUTHOR_NGWORD = "consider_author_ngword";
 export const KEY_CONSIDER_AUTHOR_LENGTH = "consider_author_length";
 export const KEY_CONSIDER_HIDDEN_EMOJI = "consider_hidden_emoji";
+export const KEY_CONSIDER_HIDDEN_SUPER_CHAT = "consider_hidden_super_chat";
+export const KEY_CONSIDER_MEMBER_ONLY = "consider_member_only";
 export const KEY_IS_HIDE_COMPLETELY = "is_hide_completely";
 export const KEY_OUTPUT_DEBUG_LOG = "output_debug_log";
 
@@ -34,6 +36,8 @@ export const paramKeys = () => {
     KEY_CONSIDER_AUTHOR_NGWORD,
     KEY_CONSIDER_AUTHOR_LENGTH,
     KEY_CONSIDER_HIDDEN_EMOJI,
+    KEY_CONSIDER_HIDDEN_SUPER_CHAT,
+    KEY_CONSIDER_MEMBER_ONLY,
     KEY_IS_HIDE_COMPLETELY,
     KEY_OUTPUT_DEBUG_LOG,
   ];
@@ -51,9 +55,11 @@ const DEFAULT_IS_ACTIVATE = true;
 const DEFAULT_CONSIDER_AUTHOR_NGWORD = false;
 const DEFAULT_CONSIDER_AUTHOR_LENGTH = true;
 const DEFAULT_CONSIDER_HIDDEN_EMOJI = false;
+const DEFAULT_CONSIDER_HIDDEN_SUPER_CHAT = false;
+const DEFAULT_CONSIDER_MEMBER_ONLY = false;
 const DEFAULT_IS_HIDE_COMPLETELY = false;
 const DEFAULT_OUTPUT_DEBUG_LOG = false;
-const DEFAULT_IS_HIDE_EMOJI = false;
+const DEFAULT_IS_FORCE_HIDE = false;
 
 export const DEFAULT_IS_USE_SAME_PARAM = false;
 
@@ -78,6 +84,8 @@ export const defaultParams: IParameter = {
   [KEY_CONSIDER_AUTHOR_NGWORD]: DEFAULT_CONSIDER_AUTHOR_NGWORD,
   [KEY_CONSIDER_AUTHOR_LENGTH]: DEFAULT_CONSIDER_AUTHOR_LENGTH,
   [KEY_CONSIDER_HIDDEN_EMOJI]: DEFAULT_CONSIDER_HIDDEN_EMOJI,
+  [KEY_CONSIDER_HIDDEN_SUPER_CHAT]: DEFAULT_CONSIDER_HIDDEN_SUPER_CHAT,
+  [KEY_CONSIDER_MEMBER_ONLY]: DEFAULT_CONSIDER_MEMBER_ONLY,
   [KEY_IS_HIDE_COMPLETELY]: DEFAULT_IS_HIDE_COMPLETELY,
   [KEY_OUTPUT_DEBUG_LOG]: DEFAULT_OUTPUT_DEBUG_LOG,
 };
@@ -96,6 +104,8 @@ export interface IParameter {
   consider_author_ngword: boolean;
   consider_author_length: boolean;
   consider_hidden_emoji: boolean;
+  consider_hidden_super_chat: boolean;
+  consider_member_only: boolean;
   is_hide_completely: boolean;
   output_debug_log: boolean;
 }
@@ -114,9 +124,11 @@ export interface IParameterV2 {
   considerAuthorNgWord: boolean;
   considerAuthorLength: boolean;
   considerHiddenEmoji: boolean;
+  considerHiddenSuperChat: boolean;
+  considerMemberOnly: boolean;
   isHideCompletely: boolean;
   outputDebugLog: boolean;
-  isHideEmoji: boolean;
+  isForceHide: boolean;
 }
 
 export const defaultParamsV2: IParameterV2 = {
@@ -133,9 +145,11 @@ export const defaultParamsV2: IParameterV2 = {
   considerAuthorNgWord: DEFAULT_CONSIDER_AUTHOR_NGWORD,
   considerAuthorLength: DEFAULT_CONSIDER_AUTHOR_LENGTH,
   considerHiddenEmoji: DEFAULT_CONSIDER_HIDDEN_EMOJI,
+  considerHiddenSuperChat: DEFAULT_CONSIDER_HIDDEN_SUPER_CHAT,
+  considerMemberOnly: DEFAULT_CONSIDER_MEMBER_ONLY,
   isHideCompletely: DEFAULT_IS_HIDE_COMPLETELY,
   outputDebugLog: DEFAULT_OUTPUT_DEBUG_LOG,
-  isHideEmoji: DEFAULT_IS_HIDE_EMOJI,
+  isForceHide: DEFAULT_IS_FORCE_HIDE,
 };
 
 export const isParameter = (arg: any): arg is IParameter => {
@@ -153,6 +167,8 @@ export const isParameter = (arg: any): arg is IParameter => {
     arg.consider_author_ngword !== undefined &&
     arg.consider_author_length !== undefined &&
     arg.consider_hidden_emoji !== undefined &&
+    arg.consider_hidden_super_chat !== undefined &&
+    arg.consider_member_only !== undefined &&
     arg.is_hide_completely !== undefined &&
     arg.output_debug_log !== undefined
   );

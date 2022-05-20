@@ -96,19 +96,22 @@ export const hidePostFlood = (param: IParameterV2, chats: IChat[]) => {
 };
 
 
+const strReason1 = chrome.i18n.getMessage("maxNumOfCharacters") ;
+const strReason2 = chrome.i18n.getMessage("hiddeEmojiComment") ;
+
 export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
 
   let strReason, isHidden ;
-
-  const strReason1 = chrome.i18n.getMessage("maxNumOfCharacters") ;
-  const strReason2 = chrome.i18n.getMessage("hiddeEmojiComment") ;
-  const strPattern = /\<img/g;
 
   for (const chat of chats) {
     const isHideMessage = chat.message.length >= param.lengthThreshold;
     const isHideAuthor =
       param.considerAuthorLength && chat.author.length >= param.lengthUserThreshold;
-    param.isHideEmoji = false;
+    const isHideSuperChat =
+      param.considerHiddenSuperChat && chat.other.isCard;
+    const isHideNotMember =
+      param.considerMemberOnly && !chat.other.isOwner && !chat.other.isMember;
+    param.isForceHide = false;
 
     if( param.outputDebugLog ) {
       console.error( "recive: " + chat.author + ": " + chat.message + ": len=" + chat.message.length);
@@ -120,15 +123,12 @@ export const hideByLength = (param: IParameterV2, chats: IChat[]) => {
     if (isHideMessage || isHideAuthor ) {
       isHidden = true;
 
+    } else if (isHideSuperChat || isHideNotMember ) {
+      param.isForceHide = true;
+      isHidden = true;
     } else if( param.considerHiddenEmoji ) {
-      const dstCount = ( chat.htmlcode.match(strPattern) || [] ).length;
-
-      if( param.outputDebugLog ) {
-        console.error( "hits: " + dstCount );
-      }
-
-      if( dstCount >= 2 ) {
-        param.isHideEmoji = true;
+      if( chat.other.img_nums >= 2 ) {
+        param.isForceHide = true;
         strReason = strReason2 ;
         isHidden = true;
       }
@@ -158,7 +158,7 @@ export const hide = (param: IParameterV2, reason: string, chat: IChat) => {
 
   chat.element.dataset.isHiddenByModekun = "1";
 
-  if (param.isHideCompletely || param.isHideEmoji ) {
+  if (param.isHideCompletely || param.isForceHide ) {
     chat.element.style.display = "none";
     if (chat.associatedElements) {
       for (const element of chat.associatedElements) {

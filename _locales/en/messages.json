@@ -56,6 +56,12 @@
   "hiddeEmojiComment": {
     "message": "2 or more emoji"
   },
+  "memberOnlyChat": {
+    "message": "For non-members"
+  },
+  "superChatCard": {
+    "message": "Target super chat"
+  },
   "isHideCompletely": {
     "message": "Hide comments completely"
   },
